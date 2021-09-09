@@ -1,0 +1,96 @@
+#bombtime {
+    font-size: 150;
+    color: white;
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 250px;
+}
+
+.guyn, .guyn1, .guyn2, .guyn3, .guyn4 {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    margin-left: 630px;
+    border: 1px solid black;
+}
+
+#xot {
+    background-color: green;
+}
+
+#xotaker {
+    margin-top: 50px;
+    background-color: yellow;
+}
+
+#gishatich {
+    margin-top: 100px;
+    background-color: red;
+}
+
+#tunxot {
+    margin-top: 150px;
+    background-color: #F62196;
+}
+
+#bonus {
+    margin-top: 200px;
+    background-color: #3171E7;
+    display: flex;
+}
+
+#bomb {
+    margin-top: 250px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    margin-left: 630px;
+    display: flex;
+}
+
+#bomb #name {
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+#name {
+    margin-left: 40px;
+    margin-top: 5px;
+    white-space: nowrap;
+}
+
+#info {
+    margin-top: 6px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+#infoblock {
+    position: relative;
+    background-color: white;
+    margin-top: -145px;
+    margin-left: -70px;
+    padding: 15px;
+    height: 120px;
+    padding-top: 10px;
+    border: 1px solid black;
+    display: none;
+    
+}
+
+#infoblock li {
+    font-size: 12px;
+    width: 345px;
+}
+
+#infoblock ul {
+    padding: 0 0 0 10;
+    /* margin: 0; */
+}
+
+#close {
+    position: absolute;
+    margin-left: 345px;
+    margin-top: -4px;
+    cursor: pointer;
+}

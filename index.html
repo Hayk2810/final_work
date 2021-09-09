@@ -1,0 +1,28 @@
+<html>
+   <head>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+       <script src="class.js"></script>
+       <script src="script.js"></script>
+       <link rel="stylesheet" href="style.css" type="text/css"/>
+   </head>
+   <body>
+       <p id="bombtime"></p>
+       <div id="xot" class="guyn"><p id="name">Խոտ</p></div>
+       <div id="xotaker" class="guyn1"><p id="name">Խոտակեր</p></div>
+       <div id="gishatich" class="guyn2"><p id="name">Գիշատիչ</p></div>
+       <div id="tunxot" class="guyn3"><p id="name">Թունավոր Խոտ</p></div>
+       <div id="bonus" class="guyn4">
+            <p id="name">Բոնուս</p>
+            <img src="info.png" width="20px" height="20px" id="info" onclick="infoblock()">
+            <div id="infoblock">
+                <img src="cancel.png" width="15px" height="15px" id="close" onclick="infoblockclose()">
+                <ul>
+                    <li>Խոտի ուտելու դեպքում վերջինս բազմանում է պատահական 5 տեղում</li>
+                    <li>Խատկերի ուտելու դեպքում վերջինս բազմանում է իր հարակից 8 վանդակներում և թունավոր խոտ ուտելիս չի մահանում</li>
+                    <li>Գիշատիչի ուտելու դեպքում վերջինս կարողանում է ուտել նաև սովորական և թունավոր խոտ</li>
+                </ul>
+            </div>
+        </div>
+        <div id="bomb"><img src="bomb.png" width="30px" height="30px"><p id="name"></p>Ռումբ</p></div>
+   </body>
+</html>
