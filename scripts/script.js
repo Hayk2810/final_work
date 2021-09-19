@@ -233,12 +233,12 @@ function setup(){
 }
 
 function draw(){
-    console.log(grassArr.length);
-    console.log(xotakerArr.length);
-    console.log(predatorArr.length);
-    console.log(tunxotArr.length);
-    console.log(bonusArr.length);
-    console.log("-------------");
+    // console.log(grassArr.length);
+    // console.log(xotakerArr.length);
+    // console.log(predatorArr.length);
+    // console.log(tunxotArr.length);
+    // console.log(bonusArr.length);
+    // console.log("-------------");
         
     for(let i in grassArr){
         grassArr[i].mul()
