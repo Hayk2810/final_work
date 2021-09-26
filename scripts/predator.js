@@ -112,9 +112,9 @@ class Predator extends LivingCreature{
             matrix[this.y][this.x] = 0;
             matrix[newY][newX] = 3;
 
-            for (var i in xotakerArr) {
-                if (newX == xotakerArr[i].x && newY == xotakerArr[i].y) {
-                    xotakerArr.splice(i, 1);
+            for (var i in grassEaterArr) {
+                if (newX == grassEaterArr[i].x && newY == grassEaterArr[i].y) {
+                    grassEaterArr.splice(i, 1);
                     break;
                 }
             }

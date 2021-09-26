@@ -4,66 +4,67 @@
 //// matrix[y][x] = 4 - tunavorxot
 //// matrix[y][x] = 5 - bonus
 
+var socket = io();
 
-matrix = []
+var side = 10;
 
-function generateMatrix(side, GrassCount, GrassEaterCount, PredatorCount){
-    
-    for (let i = 0; i < side; i++) {   
-        let arr = []   
-        matrix.push(arr)
-        for (let j = 0; j < side; j++) {   
-            matrix[i].push(0)     
-        }     
-    }
-
-    for (let i = 0; i < GrassCount; i++) {
-        let x = Math.round(random(0, side - 1))
-        let y = Math.round(random(0, side - 1))
-        if (matrix[y][x] == 0) {
-            let gr = new Grass(x,y)
-            grassArr.push(gr)
-            matrix[y][x] = 1;
-        }
-    }
-    for (let i = 0; i < GrassEaterCount; i++) {
-        let x = Math.round(random(0, side - 1))
-        let y = Math.round(random(0, side - 1))
-        if (matrix[y][x] == 0) {
-            let Xt = new Xotaker(x,y)
-            xotakerArr.push(Xt)
-            matrix[y][x] = 2;
-        }
-    }
-    for (let i = 0; i < PredatorCount; i++) {
-        let x = Math.round(random(0, side - 1))
-        let y = Math.round(random(0, side - 1))
-        if (matrix[y][x] == 0) {
-            let Pr = new Predator(x,y)
-            predatorArr.push(Pr)
-            matrix[y][x] = 3;
-        }
-    }
+function setup() {
+    createCanvas(50 * side, 50 * side);
+    background("pink");
 }
 
-var side = 15
+socket.on("weather", function (data) {
+    weath = data;
+})
 
-grassArr = []
-xotakerArr = []
-predatorArr = []
-tunxotArr = []
-bonusArr = []
+// function generateMatrix(side, GrassCount, GrassEaterCount, PredatorCount){
+    
+//     for (let i = 0; i < side; i++) {   
+//         let arr = []   
+//         matrix.push(arr)
+//         for (let j = 0; j < side; j++) {   
+//             matrix[i].push(0)     
+//         }     
+//     }
+
+//     for (let i = 0; i < GrassCount; i++) {
+//         let x = Math.round(random(0, side - 1))
+//         let y = Math.round(random(0, side - 1))
+//         if (matrix[y][x] == 0) {
+//             let gr = new Grass(x,y)
+//             grassArr.push(gr)
+//             matrix[y][x] = 1;
+//         }
+//     }
+//     // for (let i = 0; i < GrassEaterCount; i++) {
+//     //     let x = Math.round(random(0, side - 1))
+//     //     let y = Math.round(random(0, side - 1))
+//     //     if (matrix[y][x] == 0) {
+//     //         let Xt = new Xotaker(x,y)
+//     //         xotakerArr.push(Xt)
+//     //         matrix[y][x] = 2;
+//     //     }
+//     // }
+//     // for (let i = 0; i < PredatorCount; i++) {
+//     //     let x = Math.round(random(0, side - 1))
+//     //     let y = Math.round(random(0, side - 1))
+//     //     if (matrix[y][x] == 0) {
+//     //         let Pr = new Predator(x,y)
+//     //         predatorArr.push(Pr)
+//     //         matrix[y][x] = 3;
+//     //     }
+//     // }
+// }
+
 bombtelArr = []
 
-matrixkoxm = 40
-
-setTimeout(
-    function() {
-        if(grassArr.length != 0 || tunxotArr.length != 0 || xotakerArr.length != 0 || predatorArr.length != 0 || bonusArr.length != 0) {
-            generateBomb()
-        }
-    },20000
-)
+// setTimeout(
+//     function() {
+//         if(grassArr.length != 0 || tunxotArr.length != 0 || xotakerArr.length != 0 || predatorArr.length != 0 || bonusArr.length != 0) {
+//             generateBomb()
+//         }
+//     },20000
+// )
 
 function paytyun() {
     for(let y = 0; y < matrixkoxm; y++) {
@@ -71,11 +72,11 @@ function paytyun() {
             matrix[y][x] = 9
         }
     }
-    xotakerArr = []
+    grassEaterArr = []
     grassArr = []
-    predatorArr = []
-    tunxotArr = []
-    bonusArr = []
+    // predatorArr = []
+    // tunxotArr = []
+    // bonusArr = []
     setTimeout(
         function() {
             for(let y = 0; y < matrixkoxm; y++) {
@@ -197,89 +198,64 @@ function generateBomb() {
     )
 }
 
-function setup(){
-    frameRate(60)
-    generateMatrix(matrixkoxm,10,10,15)
-    createCanvas( side * matrix[0].length + 1, side * matrix.length + 1)
-    background("gray")
+// function setup(){
+//     createCanvas(50 * side, 50 * side)
+//     background("gray")
 
-    setInterval(
-        function() {
-            if(grassArr.length != 0 || xotakerArr.length != 0) {
-                let x = Math.round(random(0, matrixkoxm-1))
-                let y = Math.round(random(0, matrixkoxm-1))
-                if (matrix[y][x] == 0) {
-                let bonus = new Bonus(x,y)
-                bonusArr.push(bonus)
-                matrix[y][x] = 5;
-                }
-            }
-        },1500
-    )
+//     // setInterval(
+//     //     function() {
+//     //         if(grassArr.length != 0 || xotakerArr.length != 0) {
+//     //             let x = Math.round(random(0, matrixkoxm-1))
+//     //             let y = Math.round(random(0, matrixkoxm-1))
+//     //             if (matrix[y][x] == 0) {
+//     //             let bonus = new Bonus(x,y)
+//     //             bonusArr.push(bonus)
+//     //             matrix[y][x] = 5;
+//     //             }
+//     //         }
+//     //     },1500
+//     // )
 
-    setInterval(
-        function() {
-            if(xotakerArr.length > 15) {
-                let x = Math.round(random(0, matrixkoxm-1))
-                let y = Math.round(random(0, matrixkoxm-1))
-                if (matrix[y][x] == 0) {
-                    let Tun = new TunXot(x,y)
-                    tunxotArr.push(Tun)
-                    matrix[y][x] = 4;
-                }
-            }
-        },100
-    )
-}
+//     // setInterval(
+//     //     function() {
+//     //         if(xotakerArr.length > 15) {
+//     //             let x = Math.round(random(0, matrixkoxm-1))
+//     //             let y = Math.round(random(0, matrixkoxm-1))
+//     //             if (matrix[y][x] == 0) {
+//     //                 let Tun = new TunXot(x,y)
+//     //                 tunxotArr.push(Tun)
+//     //                 matrix[y][x] = 4;
+//     //             }
+//     //         }
+//     //     },100
+//     // )
+// }
 
-function draw(){
+function nkarel(matrix){
     // console.log(grassArr.length);
     // console.log(xotakerArr.length);
     // console.log(predatorArr.length);
     // console.log(tunxotArr.length);
     // console.log(bonusArr.length);
     // console.log("-------------");
-        
-    for(let i in grassArr){
-        grassArr[i].mul()
-    }
-    for(let i in xotakerArr){
-        xotakerArr[i].move()
-    }
-    for(let i in predatorArr){
-        predatorArr[i].move()
-    }
     
-    for(let y = 0 ; y < matrix.length ; y++){
-
-        for(let x = 0 ; x < matrix[y].length; x++){
-
-            if(matrix[y][x] == 1){
-                fill("green")
+    for(var y = 0 ; y < matrix.length ; y++){
+        for(var x = 0 ; x < matrix[0].length; x++){
+            var obj = matrix[y][x]
+            if(obj == 1){
+                if(weath == "summer") {
+                fill("green");
+            }else if (weath == "autumn") {
+                fill("#333300");
+            }else if (weath == "winter") {
+                fill("white");
+            }else if (weath == "spring") {
+                fill("#4dffa6");
             }
-            else if(matrix[y][x] == 2){
+            }else if(obj == 2){
                 fill("yellow")
             }
-            else if(matrix[y][x] == 3){
-                fill("red")
-            }
-            else if(matrix[y][x] == 4){
-                fill("#F62196")
-            }
-            else if(matrix[y][x] == 5){
-                fill("#3171E7")
-            }
-            else if(matrix[y][x] == 666) {
-                fill("black")
-            }
-            else if(matrix[y][x] == 9) {
-                fill("white")
-            }
-            else{
-                fill("#98760e")
-            }
 
-            
             rect( x * side , y * side , side , side )
             
 
@@ -287,15 +263,13 @@ function draw(){
     }
 }
 
+socket.on('send matrix', nkarel)
 
-function infoblock() {
-    document.getElementById("infoblock").style.display = 'block'
-}
 
-function infoblockclose() {
-    document.getElementById("infoblock").style.display = 'none'
-}
+// function infoblock() {
+//     document.getElementById("infoblock").style.display = 'block'
+// }
 
-// document.getElementById("info").onclick =  function() {
-    
+// function infoblockclose() {
+//     document.getElementById("infoblock").style.display = 'none'
 // }

@@ -1,4 +1,6 @@
-class Xotaker extends LivingCreature{
+let LivingCreature = require('./LivingCreature')
+
+module.exports = class GrassEater extends LivingCreature{
     constructor(x,y, index){
         super(x, y, index);
         this.energy = 10
@@ -14,9 +16,12 @@ class Xotaker extends LivingCreature{
         }
         else
         {
-            let emptyCell = random(this.chooseCell(5))
-            let emptyCell2 = random(this.chooseCell(4))
-            let emptyCell3 = random(this.chooseCell(0))
+            let newCell = this.chooseCell(5)
+            let newCell2 = this.chooseCell(4)
+            let newCell3 = this.chooseCell(0)
+            let emptyCell = newCell[Math.floor(Math.random() * newCell.length)]
+            let emptyCell2 = newCell2[Math.floor(Math.random() * newCell2.length)]
+            let emptyCell3 = newCell3[Math.floor(Math.random() * newCell3.length)]
             if(emptyCell) {
                 let x = emptyCell[0]
                 let y = emptyCell[1]
@@ -44,9 +49,9 @@ class Xotaker extends LivingCreature{
                 matrix[y][x] = 0
                 if(this.imunitet == 0) {
                     matrix[this.y][this.x] = 0
-                    for (let i in xotakerArr) {
-                        if (this.x == xotakerArr[i].x && this.y == xotakerArr[i].y) {
-                            xotakerArr.splice(i, 1)
+                    for (let i in grassEaterArr) {
+                        if (this.x == grassEaterArr[i].x && this.y == grassEaterArr[i].y) {
+                            grassEaterArr.splice(i, 1)
                             break;
                         }
                     }
@@ -79,7 +84,8 @@ class Xotaker extends LivingCreature{
             }
         }
     eat(){
-        var newCell = random(this.chooseCell(1));
+        var emptyCells = this.chooseCell(1);
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
         if (newCell) {
             var newX = newCell[0];
@@ -103,19 +109,20 @@ class Xotaker extends LivingCreature{
     
     die(){
         matrix[this.y][this.x] = 0
-            for (var i in xotakerArr) {
-                if (this.x == xotakerArr[i].x && this.y == xotakerArr[i].y) {
-                    xotakerArr.splice(i, 1)
+            for (var i in grassEaterArr) {
+                if (this.x == grassEaterArr[i].x && this.y == grassEaterArr[i].y) {
+                    grassEaterArr.splice(i, 1)
                     break;
                 }
             }
     }
 
     mul(){
-        var newCell = random(this.chooseCell(0));
+        var emptyCells = this.chooseCell(0)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
-            var newGrassEater = new Xotaker(newCell[0], newCell[1]);
-            xotakerArr.push(newGrassEater);
+            var newGrassEater = new GrassEater(newCell[0], newCell[1]);
+            grassEaterArr.push(newGrassEater);
             matrix[newCell[1]][newCell[0]] = 2;
             this.energy = 8;
             this.imunitet = 0
@@ -125,8 +132,8 @@ class Xotaker extends LivingCreature{
     mul2(){
         var newCell = random(this.chooseCell(0));
         if (newCell) {
-            var newGrassEater = new Xotaker(newCell[0], newCell[1]);
-            xotakerArr.push(newGrassEater);
+            var newGrassEater = new GrassEater(newCell[0], newCell[1]);
+            grassEaterArr.push(newGrassEater);
             matrix[newCell[1]][newCell[0]] = 2;
             newGrassEater.energy = 10;
             newGrassEater.imunitet = 1

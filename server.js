@@ -11,26 +11,78 @@ app.get('/', function (req, res) {
 });
 server.listen(3000);
 
-// grassArr = [];
-// grassEaterArr = [];
-// matrix = [];
+grassArr = [];
+grassEaterArr = [];
+matrix = [];
 
-// var n = 50;
+var n = 50;
 
-// weath = "winter";
-// Grass = require("./Grass")
-// GrassEater = require("./GrassEater")
+weath = "winter";
+Grass = require("./scripts/grass")
+GrassEater = require("./scripts/grasseater")
 
-// function rand(min, max) {
-//     return Math.random() * (max - min) + min;
-// }
+function rand(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
-// for (let i = 0; i < n; i++) {
-//     matrix[i] = [];
-//     for (let j = 0; j < n; j++) {
-//         matrix[i][j] = Math.floor(rand(0, 3))
+for (let i = 0; i < n; i++) {
+    matrix[i] = [];
+    for (let j = 0; j < n; j++) {
+        matrix[i][j] = Math.floor(rand(0, 3))
         
-//     }  
-// }
+    }  
+}
 
-// io.sockets.emit("send matrix", matrix)
+io.sockets.emit("send matrix", matrix)
+
+function createObject() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 1) {
+                matrix[y][x] = 1 
+                grassArr.push(new Grass(x, y))
+            }
+            else if (matrix[y][x] == 2) {
+                matrix[y][x] = 2
+                grassEaterArr.push(new GrassEater(x, y))
+            }
+        }
+    }
+    io.sockets.emit('send matrix', matrix)
+}
+
+function game() {
+    for (let i in grassArr) {
+        grassArr[i].mul()
+    }
+    for (let i in grassEaterArr) {
+        grassEaterArr[i].move();
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+setInterval(game, 1000)
+
+function weather() {
+    if (weath == "winter") {
+        weath = "spring"
+    }
+    else if (weath == "spring") {
+        weath = "summer"
+    }
+    else if (weath == "summer") {
+        weath = "autumn"
+    }
+    else if (weath == "autumn") {
+        weath = "winter"
+    }
+    io.sockets.emit('weather', weath)
+}
+setInterval(weather, 5000);
+
+io.on('connection', function () {
+    createObject();
+    // socket.on("kill", kill);
+    // socket.on("add grass", addGrass);
+    // socket.on("add grassEater", addGrassEater);
+});

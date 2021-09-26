@@ -1,8 +1,8 @@
 let LivingCreature = require('./LivingCreature')
 
 module.exports = class Grass extends LivingCreature {
-    constructor(x, y, index){
-        super(x, y, index);
+    constructor(x, y){
+        super(x, y);
         matrix[this.y][this.x] = 1;
         this.multiply = 0;
     }
@@ -11,7 +11,7 @@ module.exports = class Grass extends LivingCreature {
         this.multiply++
 
         let emptyCells = this.chooseCell2()
-        let randomCell = random(emptyCells)
+        let randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
         if (this.multiply >= 1 && randomCell != undefined) {
             
