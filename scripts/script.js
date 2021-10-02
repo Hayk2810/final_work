@@ -8,6 +8,8 @@ var socket = io();
 
 var side = 10;
 
+var weath = "winter";
+
 function setup() {
     createCanvas(50 * side, 50 * side);
     background("pink");
@@ -264,6 +266,16 @@ function nkarel(matrix){
 }
 
 socket.on('send matrix', nkarel)
+
+function kill() {
+    socket.emit("kill")
+}
+function addGrass() {
+    socket.emit("add grass")
+}
+function addGrassEater() {
+    socket.emit("add grassEater")
+}
 
 
 // function infoblock() {
