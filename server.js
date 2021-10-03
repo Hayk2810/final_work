@@ -212,21 +212,6 @@ function generateBomb() {
     )
 }
 
-function kill() {
-    generateBomb()
-    // grassArr = [];
-    // grassEaterArr = [];
-    // predatorArr = [];
-    // toxicGrassArr = []
-    // bonusArr = [];
-    // for (var y = 0; y < matrix.length; y++) {
-    //     for (var x = 0; x < matrix[y].length; x++) {
-    //         matrix[y][x] = 0;
-    //     }
-    // }
-    io.sockets.emit("send matrix", matrix);
-}
-
 function addGrass() {
     for (var i = 0; i < 7; i++) {
     var x = Math.floor(Math.random() * matrix[0].length)
@@ -306,7 +291,7 @@ setInterval(weather, 5000);
 
 io.on('connection', function (socket) {
     createObject();
-    socket.on("kill", kill);
+    socket.on("kill", generateBomb);
     socket.on("add grass", addGrass);
     socket.on("add grassEater", addGrassEater);
     socket.on("add predator", addPredator);

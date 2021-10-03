@@ -65,8 +65,12 @@ socket.on('send matrix', nkarel)
 function kill() {
     socket.emit("kill")
     let time = 3
-    document.getElementById("bombtime").innerHTML = time
-    time--
+    setTimeout(
+        function() {
+            document.getElementById("bombtime").innerText = time;
+            time--;
+        },100
+    )
     setInterval(
         function() {
             if(time > -1) {
