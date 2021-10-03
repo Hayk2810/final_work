@@ -71,7 +71,7 @@ module.exports = class Predator extends LivingCreature{
 
                 for (var i in toxicGrassArr) {
                     if (x == toxicGrassArr[i].x && y == toxicGrassArr[i].y) {
-                    toxicGrasstArr.splice(i, 1);
+                    toxicGrassArr.splice(i, 1);
                         break;
                     }
                 }

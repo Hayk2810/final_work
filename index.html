@@ -1,49 +1,85 @@
 <html>
    <head>
-       <script src="/socket.io/socket.io.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
-       <script src="scripts/LivingCreature.js"></script>
-       <script src="scripts/script.js"></script>
-       <link rel="stylesheet" href="style.css" type="text/css"/>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="p5.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script> -->
+        <!-- <script src="scripts/LivingCreature.js"></script> -->
+        <script src="scripts/script.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" type="text/css"/>
    </head>
    <body>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <h1>Ծրագրավորում III Երևան</h1>
+            </tr>
+            <tr>
+                <h1>Հայկ Կարապետյան</h1>
+            </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Գույն</th>
+                <th scope="col">Նկարագրություն</th>
+                <th scope="col">Ծնվել է</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td scope="row" style="background-color:green;"></td>
+                <td>Կանաչը խոտն է, որը բազմանում է N ցիկլը մեկ,մահանում է երբ նրան ուտում է խոտակերը, կամ այրում է
+                    կրակը, կամ նրան կոխկրտում է գիշատիչը</td>
+                <td id="grassCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td scope="row" style="background-color:orange;"></td>
+                <td>Դեղինը խոտակերն է, որը բազմանում է N հատ խոտ ուտելուց հետո և մահանում է N հատ չուտելուց հետո, կամ
+                    երբ նրան ուտում է գիշատիչը, կամ ռումբի պայթելուց։</td>
+                <td id="grassEaterCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td scope="row" style="background-color: red;"></td>
+                <td>Կարմիրը գիշատիչն է, որը բազմանում է N հատ խոտակեր ուտելուց և մահանում է N հատ չուտելուց հետո, կամ ռումբի պայթելուց։</td>
+                <td id="grassEaterCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td scope="row" style="background-color: #F62196;"></td>
+                <td>Վարդագույնը թունավոր խոտն է, որի ուտելուց դեպքում խոտակերը մահանում է։</td>
+                <td id="grassEaterCount"></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td scope="row" style="background-color: #3171E7;"></td>
+                <td>Կապույտը բոնուսն է, որի խոտի ուտելու դեպքում վերջինս բազմանում է պատահական 5 տեղում, խոտակերի ուտելու դեպքում վերջինս բազմանում է իր հարակից 8 վանդակներում և թունավոր խոտ ուտելիս չի մահանում, գիշատիչի ուտելու դեպքում վերջինս կարողանում է ուտել նաև սովորական և թունավոր խոտ</td>
+                <td id="grassEaterCount"></td>
+            </tr>
+        </tbody>
+    </table>
     <ul>
         <li>
-            <button onclick="kill()" id="kill">Kill them all</button>
+            <button onclick="kill()" id="kill">Սպանել բոլորին</button>
         </li>
         <li>
-            <button onclick="addGrass()">Add grass</button>
+            <button onclick="addGrass()">Ավելացնել Խոտ</button>
         </li>
         <li>
-            <button onclick="addGrassEater()">Add grass eater</button>
+            <button onclick="addGrassEater()">Ավելացնել Խոտակեր</button>
         </li>
         <li>
-            <button onclick="addPredator()">Add predator</button>
+            <button onclick="addPredator()">Ավելացնել Գիշատիչ</button>
         </li>
         <li>
-            <button onclick="addToxicGrass()">Add toxic grass</button>
+            <button onclick="addToxicGrass()">Ավելացնել Թունավոր Խոտ</button>
         </li>
         <li>
-            <button onclick="addBonus()">Add bonus</button>
+            <button onclick="addBonus()">Ավելացնել Բոնուս</button>
         </li>
     </ul>
        <p id="bombtime"></p>
-       <div id="xot" class="guyn"><p id="name">Խոտ</p></div>
-       <div id="xotaker" class="guyn1"><p id="name">Խոտակեր</p></div>
-       <div id="gishatich" class="guyn2"><p id="name">Գիշատիչ</p></div>
-       <div id="tunxot" class="guyn3"><p id="name">Թունավոր Խոտ</p></div>
-       <div id="bonus" class="guyn4">
-            <p id="name">Բոնուս</p>
-            <img src="images/info.png" width="20px" height="20px" id="info" onclick="infoblock()">
-            <div id="infoblock">
-                <img src="images/cancel.png" width="15px" height="15px" id="close" onclick="infoblockclose()">
-                <ul>
-                    <li>Խոտի ուտելու դեպքում վերջինս բազմանում է պատահական 5 տեղում</li>
-                    <li>Խատկերի ուտելու դեպքում վերջինս բազմանում է իր հարակից 8 վանդակներում և թունավոր խոտ ուտելիս չի մահանում</li>
-                    <li>Գիշատիչի ուտելու դեպքում վերջինս կարողանում է ուտել նաև սովորական և թունավոր խոտ</li>
-                </ul>
-            </div>
-        </div>
-        <div id="bomb"><img src="images/bomb.png" width="30px" height="30px"><p id="name"></p>Ռումբ</p></div>
    </body>
 </html>

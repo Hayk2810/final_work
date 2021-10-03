@@ -19,6 +19,7 @@ module.exports = class Grass extends LivingCreature {
             let y = randomCell[1]
 
             if(matrix[y][x] == 0) {
+                grassHashiv++;
                 matrix[y][x] = 1
                 let gr = new Grass(x,y)
                 grassArr.push(gr)
@@ -42,6 +43,7 @@ module.exports = class Grass extends LivingCreature {
                     let y = Math.floor(Math.random() * 40)
                     
                     if (matrix[y][x] == 0) {
+                        grassHashiv++;
                         let gr = new Grass(x,y)
                         grassArr.push(gr)
                         matrix[y][x] = 1;

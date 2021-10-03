@@ -2,8 +2,9 @@
     font-size: 150;
     color: white;
     position: absolute;
-    margin-top: 170px;
-    margin-left: 215px;
+    margin-top: 145px;
+    width: 98.3%;
+    text-align: center;
 }
 
 .guyn, .guyn1, .guyn2, .guyn3, .guyn4 {
@@ -93,4 +94,22 @@
     margin-left: 345px;
     margin-top: -4px;
     cursor: pointer;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+div {
+    display: inline-block;
+}
+
+h1 {
+    padding: 20px;
+    text-align: center;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif !important;
 }

@@ -10,6 +10,8 @@ var side = 13;
 
 var weath = "winter";
 
+let grassCountElement = document.getElementById('grassCount');
+
 function setup() {
     createCanvas(40 * side, 40 * side);
     background("pink");
@@ -18,6 +20,11 @@ function setup() {
 socket.on("weather", function (data) {
     weath = data;
 })
+
+socket.on("data", function (data) {
+    grassCountElement.innerText = data.grassCounter;
+})
+
 
 function nkarel(matrix){
     for(var y = 0 ; y < matrix.length ; y++){
@@ -35,7 +42,7 @@ function nkarel(matrix){
             }
             }
             else if (obj == 2) {
-                fill("yellow");
+                fill("orange");
             }
             else if(obj == 3){
                 fill("red");
@@ -108,10 +115,10 @@ function addBonus() {
 }
 
 
-// function infoblock() {
-//     document.getElementById("infoblock").style.display = 'block'
-// }
+function infoblock() {
+    document.getElementById("infoblock").style.display = 'block'
+}
 
-// function infoblockclose() {
-//     document.getElementById("infoblock").style.display = 'none'
-// }
+function infoblockclose() {
+    document.getElementById("infoblock").style.display = 'none'
+}
