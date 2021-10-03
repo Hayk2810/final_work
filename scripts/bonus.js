@@ -1,4 +1,4 @@
-class Bonus {
+module.exports = class Bonus {
     constructor(x,y){
         this.x = x
         this.y = y 

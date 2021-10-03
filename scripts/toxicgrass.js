@@ -1,4 +1,4 @@
-class TunXot{
+module.exports = class ToxicGrass {
     constructor(x,y){
         this.x = x
         this.y = y 

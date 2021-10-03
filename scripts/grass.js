@@ -38,8 +38,8 @@ module.exports = class Grass extends LivingCreature {
                 this.x = x;
 
                 for (let i = 0; i < 10; i++) {
-                    let x = Math.round(random(0, matrixkoxm - 1))
-                    let y = Math.round(random(0, matrixkoxm - 1))
+                    let x = Math.floor(Math.random() * 40)
+                    let y = Math.floor(Math.random() * 40)
                     
                     if (matrix[y][x] == 0) {
                         let gr = new Grass(x,y)

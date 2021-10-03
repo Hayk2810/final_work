@@ -1,4 +1,6 @@
-class Predator extends LivingCreature{
+let LivingCreature = require('./LivingCreature')
+
+module.exports = class Predator extends LivingCreature{
     constructor(x, y, index){
         super(x, y, index);
         this.energy = 30
@@ -6,11 +8,16 @@ class Predator extends LivingCreature{
     }
 
     move(){
-        let emptyCell = random(this.chooseCell(2))
-        let emptyCell2 = random(this.chooseCell(5))
-        let emptyCell3 = random(this.chooseCell(1))
-        let emptyCell4 = random(this.chooseCell(4))
-        let emptyCell5 = random(this.chooseCell(0))
+        let newCell = this.chooseCell(2)
+        let newCell2 = this.chooseCell(5)
+        let newCell3 = this.chooseCell(1)
+        let newCell4 = this.chooseCell(4)
+        let newCell5 = this.chooseCell(0)
+        let emptyCell = newCell[Math.floor(Math.random() * newCell.length)]
+        let emptyCell2 = newCell2[Math.floor(Math.random() * newCell2.length)]
+        let emptyCell3 = newCell3[Math.floor(Math.random() * newCell3.length)]
+        let emptyCell4 = newCell4[Math.floor(Math.random() * newCell4.length)]
+        let emptyCell5 = newCell5[Math.floor(Math.random() * newCell5.length)]
         if (emptyCell) {
             this.eat()
         }else if(emptyCell2) {
@@ -31,7 +38,6 @@ class Predator extends LivingCreature{
             
             this.amenaker = 1
             this.energy++;
-            console.log("gishatich kerav bonus");
         } else if (emptyCell3) {
             if(this.amenaker == 1) {
                 this.energy += 2
@@ -63,9 +69,9 @@ class Predator extends LivingCreature{
                 matrix[this.y][this.x] = 0;
                 matrix[y][x] = 3;
 
-                for (var i in tunxotArr) {
-                    if (x == tunxotArr[i].x && y == tunxotArr[i].y) {
-                        tunxotArr.splice(i, 1);
+                for (var i in toxicGrassArr) {
+                    if (x == toxicGrassArr[i].x && y == toxicGrassArr[i].y) {
+                    toxicGrasstArr.splice(i, 1);
                         break;
                     }
                 }
@@ -103,7 +109,8 @@ class Predator extends LivingCreature{
     }
 
     eat(){
-        var newCell = random(this.chooseCell(2));
+        var emptyCell = this.chooseCell(2);
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell) {
             var newX = newCell[0];
@@ -136,7 +143,8 @@ class Predator extends LivingCreature{
     }
 
     mul(){
-        var newCell = random(this.chooseCell(0));
+        var emptyCell = this.chooseCell(0)
+        var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
         if (newCell) {
             var newPredator = new Predator(newCell[0], newCell[1]);
             predatorArr.push(newPredator);

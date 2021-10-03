@@ -236,13 +236,6 @@ socket.on("weather", function (data) {
 })
 
 function nkarel(matrix){
-    // console.log(grassArr.length);
-    // console.log(xotakerArr.length);
-    // console.log(predatorArr.length);
-    // console.log(tunxotArr.length);
-    // console.log(bonusArr.length);
-    // console.log("-------------");
-    
     for(var y = 0 ; y < matrix.length ; y++){
         for (var x = 0; x < matrix[0].length; x++) {
             var obj = matrix[y][x];
@@ -256,9 +249,20 @@ function nkarel(matrix){
             }else if (weath == "spring") {
                 fill("#4dffa6");
             }
-        }else if (obj == 2) {
+            }
+            else if (obj == 2) {
                 fill("yellow");
-            }else if (obj == 0){
+            }
+            else if(obj == 3){
+                fill("red");
+            }
+            else if(obj == 4){
+                fill("#F62196")
+            }
+            else if(obj == 5){
+                fill("#3171E7")
+            }
+            else if (obj == 0){
                 fill("grey")
             }
             rect(x * side, y * side, side, side);
@@ -276,6 +280,15 @@ function addGrass() {
 }
 function addGrassEater() {
     socket.emit("add grassEater")
+}
+function addPredator() {
+    socket.emit("add predator")
+}
+function addToxicGrass() {
+    socket.emit("add toxicGrass")
+}
+function addBonus() {
+    socket.emit("add bonus")
 }
 
 

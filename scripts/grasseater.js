@@ -58,9 +58,9 @@ module.exports = class GrassEater extends LivingCreature{
                 } else { 
                     matrix[this.y][this.x] = 2
                 }
-                for (let i in tunxotArr) {
-                    if (x == tunxotArr[i].x && y == tunxotArr[i].y) {
-                        tunxotArr.splice(i, 1)
+                for (let i in toxicGrassArr) {
+                    if (x == toxicGrassArr[i].x && y == toxicGrassArr[i].y) {
+                        toxicGrassArr.splice(i, 1)
                         break;
                     }
                 }
@@ -130,7 +130,8 @@ module.exports = class GrassEater extends LivingCreature{
     }
 
     mul2(){
-        var newCell = random(this.chooseCell(0));
+        var emptyCells = this.chooseCell(0)
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         if (newCell) {
             var newGrassEater = new GrassEater(newCell[0], newCell[1]);
             grassEaterArr.push(newGrassEater);
