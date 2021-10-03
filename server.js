@@ -18,7 +18,7 @@ toxicGrassArr = [];
 bonusArr = []
 matrix = [];
 
-var n = 50;
+var n = 40;
 
 weath = "winter";
 Grass = require("./scripts/grass")
@@ -90,17 +90,140 @@ function game() {
 
 setInterval(game, 300)
 
-function kill() {
-    grassArr = [];
-    grassEaterArr = [];
-    predatorArr = [];
-    toxicGrassArr = []
-    bonusArr = [];
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            matrix[y][x] = 0;
+bombtelArr = []
+
+function paytyun() {
+    for(let y = 0; y < n; y++) {
+        for(let x = 0; x < n; x++ ){
+            matrix[y][x] = 9
         }
     }
+    grassArr = []
+    grassEaterArr = []
+    predatorArr = []
+    toxicGrassArr = []
+    bonusArr = []
+    setTimeout(
+        function() {
+            for(let y = 0; y < n; y++) {
+                for(let x = 0; x < n; x++ ){
+                    matrix[y][x] = 0
+                }
+            }
+        },1000
+    )
+}
+
+function generateBomb() {
+    let y = 13
+    let x = 15
+    for(let i = 0; i < 46; i++) {
+        if(i < 3) {
+            matrix[y][x] = 666
+            for(let k = 0 ; k < 7+(2*i); k++) {
+                if(x < 21+i) {
+                    x++
+                    matrix[y][x] = 666
+                } else {
+                    x -= 6+2*i
+                }
+            }
+            y++
+            x--
+        } else if (i > 4 && i < 13) {
+            if ( i > 6 && i < 11) {
+                x--
+                matrix[y][x] = 666
+                x++
+            }
+            for(let k = 0 ; k < 13; k++) {
+                if(x < 24) {
+                    x++
+                    matrix[y][x] = 666
+                } else {
+                    x -= 12
+                }
+            }
+            matrix[y][x] = 666
+            y++
+        } else if ( i > 13 && i < 17) {
+            x++
+            for(let k = 0 ; k < 39-2*i; k++) {
+                if(x < 37-i) {
+                    x++
+                    matrix[y][x] = 666
+                } else {
+                    x -= 38-2*i
+                }
+            }
+            matrix[y][x] = 666
+            y++
+        } else if ( i > 17 && i < 24) {
+            x++
+            matrix[y][x] = 666
+        } else if (i > 24 && i < 29) {
+            x++
+            y--
+            matrix[y][x] = 666
+        } else if (i > 28 && i < 36) {
+            y--
+            if(i > 29 && i < 34) {
+                x++
+                matrix[y][x] = 666
+                x--
+            }
+            matrix[y][x] = 666
+        } else if (i > 36 && i < 41) {
+            x--
+            y-- 
+            matrix[y][x] = 666
+        } else if (i > 40 && i < 46) {
+            x--
+            if( i > 41 && i < 44) {
+                y--
+                matrix[y][x] = 666
+                y++
+            }
+            matrix[y][x] = 666
+        }
+    }
+    matrix[10][19] = 9
+    matrix[9][20] = 9
+    matrix[8][21] = 9
+    matrix[7][22] = 9
+    matrix[6][23] = 9
+    matrix[5][24] = 9
+    matrix[4][25] = 9
+    let bx = 25
+    let by = 4
+    setInterval(
+        function() {
+            if(bx > 18) {
+                matrix[by][bx] = 0
+                bx--
+                by++
+            }
+        },3000/7
+    )
+    setTimeout(
+        function() {
+            paytyun()
+        },3200
+    )
+}
+
+function kill() {
+    generateBomb()
+    // grassArr = [];
+    // grassEaterArr = [];
+    // predatorArr = [];
+    // toxicGrassArr = []
+    // bonusArr = [];
+    // for (var y = 0; y < matrix.length; y++) {
+    //     for (var x = 0; x < matrix[y].length; x++) {
+    //         matrix[y][x] = 0;
+    //     }
+    // }
     io.sockets.emit("send matrix", matrix);
 }
 
