@@ -10,21 +10,29 @@ var side = 13;
 
 var weath = "winter";
 
-let grassCountElement = document.getElementById('grassCount');
-
 function setup() {
     createCanvas(40 * side, 40 * side);
     background("pink");
+    grassCountElement = document.getElementById('grassCount');
+    grassEaterCountElement = document.getElementById('grassEaterCount');
+    predatorCountElement = document.getElementById('predatorCount');
+    toxicGrassCountElement = document.getElementById('toxicGrassCount');
+    bonusCountElement = document.getElementById('bonusCount');
 }
 
 socket.on("weather", function (data) {
     weath = data;
 })
 
+
+
 socket.on("data", function (data) {
     grassCountElement.innerText = data.grassCounter;
+    grassEaterCountElement.innerText = data.grassEaterCounter;
+    predatorCountElement.innerText = data.predatorCounter;
+    toxicGrassCountElement.innerText = data.toxicGrassCounter;
+    bonusCountElement.innerText = data.bonusCounter;
 })
-
 
 function nkarel(matrix){
     for(var y = 0 ; y < matrix.length ; y++){
@@ -114,11 +122,3 @@ function addBonus() {
     socket.emit("add bonus")
 }
 
-
-function infoblock() {
-    document.getElementById("infoblock").style.display = 'block'
-}
-
-function infoblockclose() {
-    document.getElementById("infoblock").style.display = 'none'
-}
